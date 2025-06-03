@@ -35,6 +35,17 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y libnss3-dev libatk-bridge2.0-dev libdrm2 libxcomposite1 libxdamage1 libxrandr2 libgbm1 libxss1 libasound2
         
+    - name: Install system dependencies (macOS)
+      if: matrix.os == 'macos-latest'
+      run: |
+        brew update
+        brew install python-setuptools
+        
+    - name: Rebuild app-builder-bin (macOS)
+      if: matrix.os == 'macos-latest'
+      run: |
+        npm rebuild app-builder-bin
+        
     - name: Build for Windows
       if: matrix.os == 'windows-latest'
       run: npm run build -- --win

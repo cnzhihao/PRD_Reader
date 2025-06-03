@@ -23,6 +23,7 @@
   "author": "PRD Reader Team",
   "license": "MIT",
   "devDependencies": {
+    "app-builder-bin": "^4.2.0",
     "electron": "^28.0.0",
     "electron-builder": "^24.0.0",
     "png2icons": "^2.0.1"
@@ -96,7 +97,7 @@
           ]
         }
       ],
-      "icon": "assets/icon.png",
+      "icon": "assets/icon.icns",
       "category": "public.app-category.productivity"
     },
     "linux": {
