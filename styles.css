@@ -1,0 +1,642 @@
+/* 全局样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* 应用容器 */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* 工具栏 */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background-color: #2d2d2d;
+  border-bottom: 1px solid #404040;
+  height: 50px;
+  flex-shrink: 0;
+}
+
+.toolbar-left,
+.toolbar-center,
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.toolbar-center {
+  flex: 1;
+  justify-content: center;
+}
+
+/* 按钮样式 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #404040;
+  color: #e0e0e0;
+}
+
+.btn:hover {
+  background-color: #4a4a4a;
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary {
+  background-color: #007acc;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0086d9;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #34ce57;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #e85d6b;
+}
+
+.btn-small {
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.icon {
+  font-size: 14px;
+}
+
+/* 文件夹信息 */
+.folder-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  background-color: #333;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.folder-path {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 服务器配置 */
+.server-config {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.port-input {
+  width: 80px;
+  padding: 4px 8px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #333;
+  color: #e0e0e0;
+  font-size: 13px;
+}
+
+.port-input:focus {
+  outline: none;
+  border-color: #007acc;
+}
+
+/* 服务器状态 */
+.server-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #666;
+}
+
+.status-indicator.running {
+  background-color: #28a745;
+  box-shadow: 0 0 4px #28a745;
+}
+
+.status-indicator.error {
+  background-color: #dc3545;
+  box-shadow: 0 0 4px #dc3545;
+}
+
+.server-url {
+  color: #007acc;
+  font-family: monospace;
+}
+
+/* 主内容区域 */
+.main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* 文件浏览器 */
+.file-browser {
+  width: 30%;
+  min-width: 250px;
+  max-width: 400px;
+  background-color: #252526;
+  border-right: 1px solid #404040;
+  display: flex;
+  flex-direction: column;
+}
+
+.file-browser-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #404040;
+  background-color: #2d2d2d;
+}
+
+.file-browser-header h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e0e0e0;
+}
+
+.file-browser-content {
+  flex: 1;
+  overflow: auto;
+  padding: 8px;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  text-align: center;
+  color: #888;
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.empty-state p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* 文件树 */
+.file-tree {
+  font-size: 13px;
+}
+
+.tree-node {
+  margin: 2px 0;
+}
+
+.tree-item {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  user-select: none;
+}
+
+.tree-item:hover {
+  background-color: #333;
+}
+
+.tree-item.selected {
+  background-color: #007acc;
+  color: white;
+}
+
+.tree-item.html-file {
+  color: #4fc3f7;
+}
+
+.tree-item.directory {
+  font-weight: 500;
+}
+
+.tree-toggle {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
+  cursor: pointer;
+  font-size: 10px;
+  color: #888;
+}
+
+.tree-toggle:hover {
+  color: #e0e0e0;
+}
+
+.tree-icon {
+  margin-right: 6px;
+  font-size: 14px;
+}
+
+.tree-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tree-children {
+  margin-left: 16px;
+  border-left: 1px solid #404040;
+  padding-left: 8px;
+}
+
+.tree-children.collapsed {
+  display: none;
+}
+
+/* 浏览器视图 */
+.browser-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #1e1e1e;
+  min-height: 0;
+}
+
+.browser-header {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: #2d2d2d;
+  border-bottom: 1px solid #404040;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.browser-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.address-bar {
+  flex: 1;
+}
+
+.address-bar input {
+  width: 100%;
+  padding: 6px 12px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #333;
+  color: #e0e0e0;
+  font-size: 13px;
+  font-family: monospace;
+}
+
+.address-bar input:focus {
+  outline: none;
+  border-color: #007acc;
+}
+
+.browser-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.browser-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: #888;
+}
+
+.browser-empty-state .empty-icon {
+  font-size: 64px;
+  margin-bottom: 24px;
+  opacity: 0.3;
+}
+
+.browser-empty-state h3 {
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: #e0e0e0;
+}
+
+.browser-empty-state p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* 状态栏 */
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 16px;
+  background-color: #007acc;
+  color: white;
+  font-size: 12px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+/* 加载覆盖层 */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px;
+  background-color: #2d2d2d;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #404040;
+  border-top: 3px solid #007acc;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+  color: #e0e0e0;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* 提示框 */
+.error-toast,
+.success-toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+  max-width: 400px;
+  animation: slideIn 0.3s ease-out;
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+}
+
+.error-toast .toast-content {
+  background-color: #dc3545;
+  color: white;
+}
+
+.success-toast .toast-content {
+  background-color: #28a745;
+  color: white;
+}
+
+.toast-icon {
+  font-size: 16px;
+}
+
+.toast-message {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.toast-close:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2d2d2d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .file-browser {
+    width: 35%;
+  }
+}
+
+@media (max-width: 800px) {
+  .toolbar {
+    flex-direction: column;
+    height: auto;
+    padding: 8px;
+    gap: 8px;
+  }
+  
+  .toolbar-left,
+  .toolbar-center,
+  .toolbar-right {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .file-browser {
+    width: 40%;
+    min-width: 200px;
+  }
+  
+  .folder-path {
+    max-width: 150px;
+  }
+}
+
+/* 选中状态动画 */
+.tree-item.selected {
+  animation: selectPulse 0.3s ease-out;
+}
+
+@keyframes selectPulse {
+  0% {
+    background-color: #333;
+  }
+  50% {
+    background-color: #0099ff;
+  }
+  100% {
+    background-color: #007acc;
+  }
+}
+
+/* 加载状态 */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* 拖拽区域 */
+.file-browser-content {
+  position: relative;
+}
+
+.drop-zone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 122, 204, 0.1);
+  border: 2px dashed #007acc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #007acc;
+  z-index: 10;
+}
+
+/* WebView 样式 */
+webview {
+  background-color: white;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+}
+
+/* 焦点样式 */
+.btn:focus,
+.port-input:focus,
+.address-bar input:focus {
+  outline: 2px solid #007acc;
+  outline-offset: 2px;
+} 

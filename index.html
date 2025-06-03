@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' http://localhost:*;">
+  <title>PRD Reader</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- 顶部工具栏 -->
+    <header class="toolbar">
+      <div class="toolbar-left">
+        <button id="selectFolderBtn" class="btn btn-primary">
+          <span class="icon">📁</span>
+          选择PRD文件夹
+        </button>
+        <div class="folder-info" id="folderInfo" style="display: none;">
+          <span class="folder-path" id="folderPath"></span>
+        </div>
+      </div>
+      
+      <div class="toolbar-center">
+        <div class="server-config" id="serverConfig" style="display: none;">
+          <label for="portInput">端口:</label>
+          <input type="number" id="portInput" value="8000" min="1000" max="65535" class="port-input">
+          <button id="startServerBtn" class="btn btn-success">启动服务器</button>
+          <button id="stopServerBtn" class="btn btn-danger" style="display: none;">停止服务器</button>
+        </div>
+      </div>
+      
+      <div class="toolbar-right">
+        <div class="server-status" id="serverStatus">
+          <span class="status-indicator" id="statusIndicator"></span>
+          <span class="status-text" id="statusText">未连接</span>
+          <span class="server-url" id="serverUrl" style="display: none;"></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 主内容区域 -->
+    <main class="main-content">
+      <!-- 左侧文件浏览器 -->
+      <aside class="file-browser">
+        <div class="file-browser-header">
+          <h3>文件浏览器</h3>
+          <button id="refreshBtn" class="btn btn-small" title="刷新文件列表">
+            <span class="icon">🔄</span>
+          </button>
+        </div>
+        
+        <div class="file-browser-content">
+          <div id="emptyState" class="empty-state">
+            <div class="empty-icon">📂</div>
+            <p>请选择一个PRD文件夹开始浏览</p>
+          </div>
+          
+          <div id="fileTree" class="file-tree" style="display: none;"></div>
+        </div>
+      </aside>
+
+      <!-- 右侧浏览器视图 -->
+      <section class="browser-view">
+        <div class="browser-header">
+          <div class="browser-controls">
+            <button id="backBtn" class="btn btn-small" title="后退" disabled>
+              <span class="icon">←</span>
+            </button>
+            <button id="forwardBtn" class="btn btn-small" title="前进" disabled>
+              <span class="icon">→</span>
+            </button>
+            <button id="refreshPageBtn" class="btn btn-small" title="刷新页面">
+              <span class="icon">🔄</span>
+            </button>
+            <button id="homeBtn" class="btn btn-small" title="首页" disabled>
+              <span class="icon">🏠</span>
+            </button>
+          </div>
+          
+          <div class="address-bar">
+            <input type="text" id="addressInput" placeholder="输入URL或选择HTML文件..." readonly>
+          </div>
+        </div>
+        
+        <div class="browser-content">
+          <div id="browserEmptyState" class="browser-empty-state">
+            <div class="empty-icon">🌐</div>
+            <h3>PRD浏览器</h3>
+            <p>启动服务器后，在左侧选择HTML文件进行浏览</p>
+          </div>
+          
+          <webview id="webview" 
+                   style="display: none;"
+                   allowpopups
+                   disablewebsecurity>
+          </webview>
+        </div>
+      </section>
+    </main>
+
+    <!-- 状态栏 -->
+    <footer class="status-bar">
+      <div class="status-left">
+        <span id="loadingStatus"></span>
+      </div>
+      <div class="status-right">
+        <span id="fileCount"></span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 加载提示 -->
+  <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+    <div class="loading-spinner">
+      <div class="spinner"></div>
+      <p id="loadingText">正在加载...</p>
+    </div>
+  </div>
+
+  <!-- 错误提示 -->
+  <div id="errorToast" class="error-toast" style="display: none;">
+    <div class="toast-content">
+      <span class="toast-icon">⚠️</span>
+      <span class="toast-message" id="errorMessage"></span>
+      <button class="toast-close" id="closeErrorToast">×</button>
+    </div>
+  </div>
+
+  <!-- 成功提示 -->
+  <div id="successToast" class="success-toast" style="display: none;">
+    <div class="toast-content">
+      <span class="toast-icon">✅</span>
+      <span class="toast-message" id="successMessage"></span>
+      <button class="toast-close" id="closeSuccessToast">×</button>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html> 
